@@ -1,0 +1,4 @@
+php artisan serve
+npm run watch
+
+-Inicializar servicio MySQL80 cuando se requiera
