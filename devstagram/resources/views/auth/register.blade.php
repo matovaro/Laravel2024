@@ -64,11 +64,11 @@ Registro
                 <input id="password" name="password" placeholder="Contraseña" type="password" class="border p-3 w-full rounded-lg
                     @error('password')
                     border-red-500
-                @enderror
-                " value="{{ old('password') }}" />
+                @enderror" />
+
                 @error('password')
-                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
-                    {{ $message }}
+                <p class=" bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                {{ $message }}
                 </p>
                 @enderror
             </div>
@@ -77,7 +77,13 @@ Registro
                     Confirma la contraseña
                 </label>
                 <input id="password_confirmation" name="password_confirmation" placeholder="Confirmar contraseña"
-                    type="password" class="border p-3 w-full rounded-lg" />
+                    type="password" class="border p-3 w-full rounded-lg" @error('password_confirmation') border-red-500
+                    @enderror" />
+                @error('password_confirmation')
+                <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">
+                    {{ $message }}
+                </p>
+                @enderror
             </div>
 
             <input type="submit" value="Crear cuenta"
