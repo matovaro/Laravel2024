@@ -13,10 +13,32 @@
     <header class="p-5 border-b bg-white shadow">
         <div class="container max-auto flex justify-between items-center">
             <h1 class="text-3xl font-black">DevStagram</h1>
+
+{{--             @if (auth()->user())
+            <p>Hola, {{ auth()->user()->name }} </p>
+            @else
             <nav class="flex gap-2 items-center">
-                <a class="font-bold uppercase text-gray-600 text-sm" href="#">Login</a>
+                <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('login') }}">Login</a>
                 <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('register') }}">Crear cuenta</a>
             </nav>
+            @endif --}}
+
+            @auth
+            <p class="font-bold uppercase text-gray-600 text-sm">Hola, <span class="font-normal">{{ auth()->user()->name }}</span> </p>
+            <nav class="flex gap-2 items-center">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                <button type="submit" class="font-bold uppercase text-gray-600 text-sm">Logout</button>
+                </form>
+            </nav>
+            @endauth
+            @guest
+            <nav class="flex gap-2 items-center">
+                <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('login') }}">Login</a>
+                <a class="font-bold uppercase text-gray-600 text-sm" href="{{ route('register') }}">Crear cuenta</a>
+            </nav>
+            @endguest
+
         </div>
     </header>
 

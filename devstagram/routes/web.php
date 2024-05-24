@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RegisterController;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,8 +23,14 @@ Route::get('/', function () {
 });
 
 // Si se tienen las mismas URL, el name aplica para multiples rutas
-Route::get('/crear-cuenta', [RegisterController::class, 'index'])->name('register');
-Route::post('/crear-cuenta', [RegisterController::class, 'store']);
+Route::get('/register', [RegisterController::class, 'index'])->name('register');
+Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::post('/login', [LoginController::class, 'store']);
+
+// POST para poder usar form para deslogueo y poner seguridad csrf
+Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/muro', [PostController::class, 'index'])->name('post.index');
 
