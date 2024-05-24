@@ -32,5 +32,7 @@ Route::post('/login', [LoginController::class, 'store']);
 // POST para poder usar form para deslogueo y poner seguridad csrf
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
-Route::get('/muro', [PostController::class, 'index'])->name('post.index');
+//Al ponerlo dentro de llaves, el utiliza el modelo User
+// Despues de los ':' se pone el atributo que deseamos que se muestre
+Route::get('/{user:username}', [PostController::class, 'index'])->name('post.index');
 
