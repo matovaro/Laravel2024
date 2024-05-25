@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function __construct() {
+        // Esto hace que se valide que el usuario este autenticado para que pueda acceder a los post
         $this->middleware('auth');
     }
     
@@ -15,5 +16,9 @@ class PostController extends Controller
         return view('dashboard', [
             'user' => $user
         ]);
+    }
+
+    public function create(){
+        return view('posts.create');
     }
 }
