@@ -2,3 +2,5 @@ php artisan serve
 npm run watch
 
 -Inicializar servicio MySQL80 cuando se requiera
+
+php artisan make:model --migration --controller --factory Post // Crea el modelo, controllador, factory y migracion para el modelo

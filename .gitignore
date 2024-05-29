@@ -1,0 +1,18 @@
+# Created by https://www.toptal.com/developers/gitignore/api/laravel
+# Edit at https://www.toptal.com/developers/gitignore?templates=laravel
+
+### Laravel ###
+/devstagram/vendor/
+devstagram/node_modules/
+devstagram/public/uploads/*
+devstagram/npm-debug.log
+devstagram/yarn-error.log
+
+devstagram/storage/*.key
+devstagram/.env
+devstagram/Homestead.yaml
+devstagram/Homestead.json
+/devstagram/.vagrant
+devstagram/.phpunit.result.cache
+
+# End of https://www.toptal.com/developers/gitignore/api/laravel
