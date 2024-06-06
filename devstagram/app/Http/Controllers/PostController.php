@@ -14,8 +14,14 @@ class PostController extends Controller
     }
     
     public function index(User $user){
+
+        // PAginate muestra automaticamente la cantidad indicada y en blade se pasa al siguiente grupo con links()
+        // Hay que ajustar tailwind.config.js para que tenga en cuenta las plantillas del paginador en vendor
+        $posts = Post::where('user_id',$user->id)->paginate(8);
+
         return view('dashboard', [
-            'user' => $user
+            'user' => $user,
+            'posts' => $posts
         ]);
     }
 
@@ -42,12 +48,21 @@ class PostController extends Controller
 
         // Forma #2 de crear registros
 
-        $post = new Post;
+        /*$post = new Post;
         $post->titulo = $request->titulo;
         $post->descripcion = $request->descripcion;
         $post->imagen = $request->imagen;
         $post->user_id = auth()->user()->id;
-        $post->save();
+        $post->save();*/
+
+        // Forma #3 de crear registros (Requiere que se hayan definido los hasMany, belongsTo,... en los modelos) 
+
+        $request->user()->posts()->create([
+            'titulo' => $request->titulo,
+            'descripcion' => $request->descripcion,
+            'imagen' => $request->imagen,
+            'user_id' => auth()->user()->id
+        ]);
 
         return redirect()->route('post.index', ['user' => auth()->user()]);
     }

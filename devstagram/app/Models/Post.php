@@ -20,4 +20,10 @@ class Post extends Model
         'imagen',
         'user_id'
     ];
+
+    public function user(){
+        // El select filtra la ifnormación que deseamos que se muestre cuando se hace el llamado al metodo
+        // Si por alguna razon, no se usaran nombres en ingles, los metodos tienen un segundo parametro para definir con cual columna se hace la relacion
+        return $this->belongsTo(User::class)->select(['name','username']);
+    }
 }
