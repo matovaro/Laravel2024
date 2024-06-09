@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function __construct() {
         // Esto hace que se valide que el usuario este autenticado para que pueda acceder a los post
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['show','index']);
     }
     
     public function index(User $user){
@@ -39,7 +39,7 @@ class PostController extends Controller
 
         // Forma #1 de crear registros
 
-/*         Post::create([
+        /* Post::create([
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
             'imagen' => $request->imagen,
@@ -56,12 +56,13 @@ class PostController extends Controller
         $post->save();*/
 
         // Forma #3 de crear registros (Requiere que se hayan definido los hasMany, belongsTo,... en los modelos) 
-
+        $uniqueHash = explode('.', $request->imagen)[0];
         $request->user()->posts()->create([
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
             'imagen' => $request->imagen,
-            'user_id' => auth()->user()->id
+            'user_id' => auth()->user()->id,
+            'uniqueHash' => $uniqueHash
         ]);
 
         return redirect()->route('post.index', ['user' => auth()->user()]);
@@ -70,7 +71,8 @@ class PostController extends Controller
     public function show(User $user, Post $post)
     {
         return view('posts.show',[
-            'post' => $post
+            'post' => $post,
+            'user' => $user
         ]);
     }
 }

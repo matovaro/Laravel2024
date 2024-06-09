@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Comentario extends Model
 {
     use HasFactory;
 
@@ -15,11 +15,9 @@ class Post extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'titulo',
-        'descripcion',
-        'imagen',
+        'comentario',
         'user_id',
-        'uniqueHash'
+        'post_id'
     ];
 
     public function user(){
@@ -28,7 +26,9 @@ class Post extends Model
         return $this->belongsTo(User::class)->select(['name','username']);
     }
 
-    public function comentarios(){
-        return $this->hasMany(Comentario::class)->orderBy('created_at', 'desc');
+    public function post(){
+
+        return $this->belongsTo(Post::class)->select(['titulo','descripcion']);
+        
     }
 }
