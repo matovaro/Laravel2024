@@ -51,7 +51,7 @@
                     peticiones --}}
                     @method('DELETE')
                     @csrf
-                    <button type="submit"
+                    <button type="submit" title="Desmemoricemos esto..."
                         class=" bg-red-500 hover:bg-red-600 p-2 rounded text-white font-bold mt-4 cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
