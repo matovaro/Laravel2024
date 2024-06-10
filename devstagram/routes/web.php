@@ -34,6 +34,10 @@ Route::get('/', function () {
 Route::get('/edit-profile', [PerfilController::class, 'index'])->name('perfil.index');
 Route::post('/edit-profile', [PerfilController::class, 'store'])->name('perfil.store');
 
+
+Route::get('/change-password', [PerfilController::class, 'passwordForm'])->name('perfil.formPass');
+Route::post('/change-password', [PerfilController::class, 'storePassword'])->name('perfil.storePassword');
+
 // Si se tienen las mismas URL, el name aplica para multiples rutas
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('/register', [RegisterController::class, 'store']);

@@ -8,7 +8,7 @@
 <div class="flex justify-center">
     <div class="w-full md:w-8/12 lg:w-6/12 flex flex-col items-center md:flex-row">
         <div class="w-8/12 lg:w-6/12 px-5">
-            <img src="{{ asset('img/usuario.svg') }}" alt="Imagen de usuario" />
+            <img src="{{ $user->imagen ? asset('perfiles') . '/'. $user->imagen : asset('img/usuario.svg') }}" alt="Imagen de usuario" class=" rounded-full"/>
         </div>
         <div
             class="md:w-8/12 lg:w-6/12 px-5 md:flex md:flex-col items-center md:justify-center md:items-start py-10 md:py-10">
@@ -18,8 +18,7 @@
 
                 @auth
                 @if ($user->id === auth()->user()->id)
-                <a class=" text-gray-500 hover:text-gray-600 cursor-pointer"
-                href="{{ route('perfil.index') }}">
+                <a class=" text-gray-500 hover:text-gray-600 cursor-pointer" href="{{ route('perfil.index') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round"
