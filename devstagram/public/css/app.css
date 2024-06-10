@@ -540,6 +540,12 @@ video {
 .z-0 {
   z-index: 0;
 }
+.float-end {
+  float: inline-end;
+}
+.float-right {
+  float: right;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -626,6 +632,9 @@ video {
 .w-full {
   width: 100%;
 }
+.w-1\/2 {
+  width: 50%;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -637,6 +646,9 @@ video {
 }
 .flex-col {
   flex-direction: column;
+}
+.items-end {
+  align-items: flex-end;
 }
 .items-center {
   align-items: center;
