@@ -52,4 +52,8 @@ class User extends Authenticatable
     public function comentarios(){
         return $this->hasMany(Comentario::class)->orderBy('created_at', 'desc');
     }
+
+    public function likes(){
+        return $this->hasMany(Like::class);
+    }
 }
