@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ComentarioController;
+use App\Http\Controllers\FollowerController;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -63,3 +64,6 @@ Route::delete('/posts/{post}/likes', [LikeController::class, 'destroy'])->name('
 //Al ponerlo dentro de llaves, el utiliza el modelo User
 // Despues de los ':' se pone el atributo que deseamos que se muestre
 Route::get('/{user:username}', [PostController::class, 'index'])->name('post.index');
+
+Route::post('/{user:username}/follow', [FollowerController::class, 'store'])->name('users.follow');
+Route::delete('/{user:username}/unfollow', [FollowerController::class, 'destroy'])->name('users.unfollow');

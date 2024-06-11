@@ -8,7 +8,8 @@
 <div class="flex justify-center">
     <div class="w-full md:w-8/12 lg:w-6/12 flex flex-col items-center md:flex-row">
         <div class="w-8/12 lg:w-6/12 px-5">
-            <img src="{{ $user->imagen ? asset('perfiles') . '/'. $user->imagen : asset('img/usuario.svg') }}" alt="Imagen de usuario" class=" rounded-full"/>
+            <img src="{{ $user->imagen ? asset('perfiles') . '/'. $user->imagen : asset('img/usuario.svg') }}"
+                alt="Imagen de usuario" class=" rounded-full" />
         </div>
         <div
             class="md:w-8/12 lg:w-6/12 px-5 md:flex md:flex-col items-center md:justify-center md:items-start py-10 md:py-10">
@@ -30,19 +31,51 @@
                 @endauth
             </div>
             <p class=" text-gray-800 text-sm mb-3 font-bold">
-                0
-                <span class="font-normal"> Seguidores</span>
+                {{ $user->followers->count() }}
+                <span class="font-normal"> @choice('Seguidor|Seguidores', $user->followers->count()) </span>
             </p>
 
             <p class=" text-gray-800 text-sm mb-3 font-bold">
-                0
-                <span class="font-normal"> Siguiendo</span>
+                {{ $user->follows->count() }}
+                <span class="font-normal"> @choice('Seguido|Seguidos', $user->follows->count())</span>
             </p>
 
             <p class=" text-gray-800 text-sm mb-3 font-bold">
                 {{ $user->posts->count() }}
-                <span class="font-normal"> Post</span>
+                <span class="font-normal"> @choice('Post|Posts', $user->posts->count())</span>
             </p>
+
+            @auth
+            @if ($user->id !== auth()->user()->id)
+
+                @if ($user->checkFollow(auth()->user()))
+                    <form method="POST" action="{{ route('users.unfollow', ['user' => $user]) }}">
+                        @csrf
+                        @method('DELETE')
+                        <div class=" my-4">
+                            <button type="submit" title="Tomemos nuestro camino">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                                    <path d="M10.375 2.25a4.125 4.125 0 1 0 0 8.25 4.125 4.125 0 0 0 0-8.25ZM10.375 12a7.125 7.125 0 0 0-7.124 7.247.75.75 0 0 0 .363.63 13.067 13.067 0 0 0 6.761 1.873c2.472 0 4.786-.684 6.76-1.873a.75.75 0 0 0 .364-.63l.001-.12v-.002A7.125 7.125 0 0 0 10.375 12ZM16 9.75a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5h-6Z" />
+                                  </svg>
+                                  
+                            </button>
+                        </div>
+                    </form>
+                @else
+                    <form method="POST" action="{{ route('users.follow', ['user' => $user]) }}">
+                        @csrf
+                        <div class=" my-4">
+                            <button type="submit" title="Lo seguimos?">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                                    <path d="M5.25 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM2.25 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM18.75 7.5a.75.75 0 0 0-1.5 0v2.25H15a.75.75 0 0 0 0 1.5h2.25v2.25a.75.75 0 0 0 1.5 0v-2.25H21a.75.75 0 0 0 0-1.5h-2.25V7.5Z" />
+                                  </svg>
+                                  
+                            </button>
+                        </div>
+                    </form>
+                @endif
+            @endif
+            @endauth
         </div>
     </div>
 </div>
