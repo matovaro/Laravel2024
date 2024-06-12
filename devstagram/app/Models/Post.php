@@ -29,7 +29,7 @@ class Post extends Model
     }
 
     public function comentarios(){
-        return $this->hasMany(Comentario::class)->orderBy('created_at', 'desc');
+        return $this->hasMany(Comentario::class)->latest();
     }
 
     public function likes(){

@@ -18,7 +18,7 @@ class PostController extends Controller
 
         // PAginate muestra automaticamente la cantidad indicada y en blade se pasa al siguiente grupo con links()
         // Hay que ajustar tailwind.config.js para que tenga en cuenta las plantillas del paginador en vendor
-        $posts = Post::where('user_id',$user->id)->paginate(8);
+        $posts = Post::where('user_id',$user->id)->latest()->paginate(8);
 
         return view('dashboard', [
             'user' => $user,

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\FollowerController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -26,11 +27,11 @@ use App\Models\Post;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('principal');
-});
+});*/
 
-
+Route::get('/', HomeController::class)->name('home');
 
 Route::get('/edit-profile', [PerfilController::class, 'index'])->name('perfil.index');
 Route::post('/edit-profile', [PerfilController::class, 'store'])->name('perfil.store');
