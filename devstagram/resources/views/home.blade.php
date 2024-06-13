@@ -4,27 +4,16 @@ Esto es una galeria de arte
 @endsection
 @section('contenido')
 
-{{-- @forelse ($posts as $post)
-<h1>{{$post->titulo}}</h1>
-@empty
-<h1>Vacio...</h1>
-@endforelse --}}
+{{-- De esta manera de hace el llamado a los componentes.
+Si el cierre es />, no usara slots
+Si es cierre es <></>, usara slots y estos iran en medio del elemento
+--}}
+{{-- <x-listar-post>
+    <h1>Hola desde el home</h1>
+    <x-slot name="title">
+        <header>Este es un header</header>
+    </x-slot name="title">
+</x-listar-post> --}}
 
-@if ($posts->count())
-    <div class=" grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        @foreach ($posts as $post)
-        <div>
-            <a href="{{ route('posts.show', ['post'=> $post, 'user' => $post->user ]) }}">
-                <img src="{{ asset('uploads') .'/'. $post->imagen }}" alt="Imagen {{ $post->titulo }}" />
-            </a>
-        </div>
-        @endforeach
-    </div>
-    <div class=" my-10">
-        {{ $posts->links('pagination::tailwind') }}
-    </div>
-    @else
-    <p class=" text-gray-600 uppercase text-sm text-center font-bold">Sigue a alguien para ver su arte</p>
-    @endif
-
+<x-listar-post :posts="$posts" {{-- Equivalente a :$posts --}} />
 @endsection
